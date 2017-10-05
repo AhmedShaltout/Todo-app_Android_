@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ubuntu.list_todo.Edit">
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:divider="@drawable/big_div"
+        android:showDividers="middle"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/title"
+            android:background="@drawable/black_rect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:minHeight="200dp"
+            android:background="@drawable/black_rect"
+            android:textAlignment="gravity"
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/red_rect"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="@string/cancel"
+                android:onClick="Cancel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/green_rect"
+                android:textColor="@android:color/holo_green_dark"
+                android:text="@string/save"
+                android:onClick="Save"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
