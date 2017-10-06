@@ -19,7 +19,8 @@ public class DB extends SQLiteOpenHelper {
     private static final String col_2 = "date";
     private static final String col_3 = "body";
     private static final String col_4 = "done";
-    private static final int version = 14;
+    private static final String col_5 = "dateDone";
+    private static final int version = 16;
     public DB(Context context) {
         super(context, db , null,version );
     }
@@ -32,8 +33,9 @@ public class DB extends SQLiteOpenHelper {
                 ""+col_0+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ""+col_1+" TEXT, " +
                 ""+col_2+" DATE DEFAULT (datetime('now')), " +
-                ""+col_3+" TEXT," +
-                ""+col_4+" INTEGER DEFAULT 0"+
+                ""+col_3+" TEXT, " +
+                ""+col_4+" INTEGER DEFAULT 0, " +
+                ""+col_5+" DATE " +
                 ")");
     }
 
@@ -43,10 +45,12 @@ public class DB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    private String getDate(){
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    }
     public boolean addTask(String title, String body){
         SQLiteDatabase db = this.getWritableDatabase();
-        Date cDate = new Date();
-        String fDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cDate);
+        String fDate = getDate();
         ContentValues values = new ContentValues();
         values.put(col_1,title);
         values.put(col_2, fDate);
@@ -61,11 +65,11 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public Task[] getTodo(){
-        return createTasks(0);
+        return createTasks(0,"ORDER BY "+col_0+" DESC");
     }
 
     public Task[] getDone(){
-        return createTasks(1);
+        return createTasks(1, "ORDER BY "+col_5+" DESC");
     }
 
     public Task getTask(int value){
@@ -73,20 +77,42 @@ public class DB extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM "+ TABLE +" WHERE "+col_0+" = "+value+"",null);
         Task task = null;
         if(res.moveToFirst()) {
-            task = new Task(res.getInt(0),res.getString(1),res.getString(2),res.getString(3));
+            String date = "Created: "+res.getString(2);
+            if(res.getInt(4)>0){
+                date +="\nFinished:"+res.getString(5);
+            }
+            task = new Task(res.getInt(0),res.getString(1),date,res.getString(3));
         }
         db.close();
         res.close();
         return task;
     }
-    private Task[] createTasks(int value){
+
+    public String getTaskDate(int id){SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE +" WHERE "+col_0+" = "+id+"",null);
+        if(res.moveToFirst()) {
+            String date = "Created: "+res.getString(2);
+            if(res.getInt(4)>0){
+                date +="\nFinished:"+res.getString(5);
+            }
+            db.close();
+            res.close();
+            return date;
+        }
+        return "";
+    }
+    private Task[] createTasks(int value, String order){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE +" WHERE done = "+value+"",null);
+        Cursor res = db.rawQuery("SELECT * FROM "+ TABLE +" WHERE done = "+value+" "+order,null);
         Task[] tasks = new Task[res.getCount()];
         if(res.moveToFirst()) {
             int index = 0;
             do{
-                tasks[index] = new Task(res.getInt(0),res.getString(1),res.getString(2),res.getString(3));
+                String date = "Created: "+res.getString(2);
+                if(res.getInt(4)>0){
+                    date +="\nFinished:"+res.getString(5);
+                }
+                tasks[index] = new Task(res.getInt(0), res.getString(1), date,res.getString(3));
                 index++;
             }while (res.moveToNext());
         }
@@ -105,6 +131,7 @@ public class DB extends SQLiteOpenHelper {
     public boolean markDone(int id){
         ContentValues values = new ContentValues();
         values.put(col_4, 1);
+        values.put(col_5, getDate());
         return update(id, values);
 
     }

@@ -89,9 +89,10 @@ public class Todo extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if( isChecked ){
                     LinearLayout task = (LinearLayout) buttonView.getParent();
-                    String id = ((TextView)task.findViewById(R.id.idHolder)).getText().toString();
-                    db.markDone(Integer.parseInt(id));
+                    Integer id = Integer.parseInt(((TextView)task.findViewById(R.id.idHolder)).getText().toString());
+                    db.markDone(id);
                     cont.removeView(task);
+                    ((TextView) task.findViewById(R.id.date)).setText(db.getTaskDate(id));
                     communicator.moveThisToFragment(task);
                 }
             }

@@ -17,9 +17,6 @@ import com.example.ubuntu.list_todo.controllers.DB;
 import com.example.ubuntu.list_todo.controllers.Task;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Done extends Fragment {
 
     private LayoutInflater inflater;
@@ -33,7 +30,6 @@ public class Done extends Fragment {
     @Override
     public View onCreateView(LayoutInflater infl, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         inflater = infl;
         db = new DB(getActivity());
         View view = inflater.inflate(R.layout.fragment_done, container, false);
@@ -43,7 +39,6 @@ public class Done extends Fragment {
     }
 
     private void getData() {
-        //////////////// GET THE DATA ///////////////
         Task[] done = db.getDone();
         if(done != null) {
             for (Task task:done) {
@@ -63,7 +58,7 @@ public class Done extends Fragment {
     }
     public void addDone(LinearLayout task) {
         setListeners(task);
-        cont.addView(task);
+        cont.addView(task,0);
     }
 
     private void setListeners(final LinearLayout layout) {
