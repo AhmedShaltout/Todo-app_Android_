@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/luncher"
+        android:icon="@drawable/_luncher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/luncher"
+        android:roundIcon="@drawable/_luncher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

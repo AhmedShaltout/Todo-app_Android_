@@ -1,4 +1,4 @@
-package com.example.ubuntu.list_todo;
+package com.example.ubuntu.list_todo.controllers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -78,6 +76,7 @@ public class DB extends SQLiteOpenHelper {
             task = new Task(res.getInt(0),res.getString(1),res.getString(2),res.getString(3));
         }
         db.close();
+        res.close();
         return task;
     }
     private Task[] createTasks(int value){
@@ -92,6 +91,7 @@ public class DB extends SQLiteOpenHelper {
             }while (res.moveToNext());
         }
         db.close();
+        res.close();
         return tasks;
     }
 
@@ -104,7 +104,7 @@ public class DB extends SQLiteOpenHelper {
 
     public boolean markDone(int id){
         ContentValues values = new ContentValues();
-        values.put(col_4, new Integer(1));
+        values.put(col_4, 1);
         return update(id, values);
 
     }

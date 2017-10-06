@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ubuntu.list_todo.controllers.DB;
+
 public class Add extends AppCompatActivity {
     private DB db;
     @Override
@@ -19,7 +21,7 @@ public class Add extends AppCompatActivity {
         final String title = ((EditText) findViewById(R.id.add_title)).getText().toString(),
                 body = ((EditText) findViewById(R.id.add_body)).getText().toString(),
                 message;
-        if(title == null || body == null || title.equals("") || body.equals("") ){
+        if(title.equals("") || body.equals("") ){
             message = "Please fill all the data";
         }else{
             if( db.addTask(title,body) ) {

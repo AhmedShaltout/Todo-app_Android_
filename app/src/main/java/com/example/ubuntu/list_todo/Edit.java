@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ubuntu.list_todo.controllers.DB;
+import com.example.ubuntu.list_todo.controllers.Task;
+
 public class Edit extends AppCompatActivity {
     private DB db;
     private int id;
@@ -14,18 +17,18 @@ public class Edit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         db = new DB(this);
-        id =Todo.editThis;
+        id = Todo.editThis;
         final Task t = db.getTask(id);
-        ((EditText)findViewById(R.id.title)).setText(t.getTitle());
-        ((EditText)findViewById(R.id.body)).setText(t.getBody());
+        ((EditText)findViewById(R.id.edit_title)).setText(t.getTitle());
+        ((EditText)findViewById(R.id.edit_body)).setText(t.getBody());
     }
 
 
     public void Save(View view){
-        final String title = ((EditText) findViewById(R.id.title)).getText().toString(),
-                body = ((EditText) findViewById(R.id.body)).getText().toString(),
+        final String title = ((EditText) findViewById(R.id.edit_title)).getText().toString(),
+                body = ((EditText) findViewById(R.id.edit_body)).getText().toString(),
                 message;
-        if(title == null || body == null || title.equals("") || body.equals("") ){
+        if(title.equals("") || body.equals("") ){
             message = "Please fill all the data";
         }else{
             if( db.updateTask(id, title,body) ) {

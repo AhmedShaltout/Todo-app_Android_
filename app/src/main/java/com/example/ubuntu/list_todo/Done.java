@@ -1,7 +1,6 @@
 package com.example.ubuntu.list_todo;
 
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.ubuntu.list_todo.controllers.DB;
+import com.example.ubuntu.list_todo.controllers.Task;
 
 
 /**
@@ -45,25 +46,24 @@ public class Done extends Fragment {
         //////////////// GET THE DATA ///////////////
         Task[] done = db.getDone();
         if(done != null) {
-            for (int x = 0; x < done.length; x++) {
-                final Task task = done[x];
-                View inflatedView = inflater.inflate(R.layout.task, null);
-                LinearLayout layout = inflatedView.findViewById(R.id.task);
-                setListeners(layout);
-                ((TextView) layout.findViewById(R.id.idHolder)).setText(task.getId().toString());
-                ((TextView) layout.findViewById(R.id.title)).setText(task.getTitle());
-                ((TextView) layout.findViewById(R.id.date)).setText(task.getDate());
-                cont.addView(layout);
+            for (Task task:done) {
+                addTask(task);
             }
         }
     }
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(this.isVisible()){
-            cont.removeAllViews();
-            getData();
-        }
+
+    private void addTask(Task task){
+        View inflatedView = inflater.inflate(R.layout.task, cont, false);
+        LinearLayout layout = inflatedView.findViewById(R.id.task);
+        setListeners(layout);
+        ((TextView) layout.findViewById(R.id.idHolder)).setText(task.getId().toString());
+        ((TextView) layout.findViewById(R.id.title)).setText(task.getTitle());
+        ((TextView) layout.findViewById(R.id.date)).setText(task.getDate());
+        cont.addView(layout);
+    }
+    public void addDone(LinearLayout task) {
+        setListeners(task);
+        cont.addView(task);
     }
 
     private void setListeners(final LinearLayout layout) {

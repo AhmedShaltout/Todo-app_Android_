@@ -1,14 +1,11 @@
-package com.example.ubuntu.list_todo;
+package com.example.ubuntu.list_todo.controllers;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 
-/**
- * Created by ubuntu on 04/10/17.
- */
-
+import com.example.ubuntu.list_todo.Done;
+import com.example.ubuntu.list_todo.Todo;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {

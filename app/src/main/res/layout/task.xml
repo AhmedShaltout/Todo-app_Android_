@@ -4,7 +4,7 @@
     android:id="@+id/task"
     android:divider="@drawable/sml_div"
     android:showDividers="middle"
-    android:padding="10dp"
+    android:padding="5dp"
     android:background="@drawable/gray_rect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right">
+        android:gravity="end">
         <TextView
             android:id="@+id/idHolder"
             android:layout_width="0dp"
@@ -22,23 +22,23 @@
 
         <Button
             android:id="@+id/edit"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/edit" />
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/_edit" />
         <Button
             android:id="@+id/details"
-            android:layout_width="40dp"
-            android:layout_marginRight="5dp"
-            android:layout_height="40dp"
-            android:background="@drawable/view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/_view"
             />
 
         <Button
             android:id="@+id/delete"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/delete" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/_delete" />
     </LinearLayout>
     <TextView
         android:id="@+id/title"
@@ -46,20 +46,18 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="25dp"
-        android:text="@string/app_name"
+        android:textSize="20sp"
         />
     <TextView
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
-        android:text="@string/app_name"
         />
 
     <Switch
         android:id="@+id/markDone"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

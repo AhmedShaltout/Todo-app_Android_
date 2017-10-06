@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragDone"
     tools:context="com.example.ubuntu.list_todo.Done">
     <LinearLayout
         android:id="@+id/doneView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/big_div"
+        android:padding="10dp"
         android:showDividers="middle"
         android:orientation="vertical">
     </LinearLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/back"
@@ -9,11 +8,20 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
         android:divider="@drawable/big_div"
+        android:padding="20dp"
         android:showDividers="middle"
-        android:padding="10dp"
         android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/taskDetails"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"
+            android:textColor="@color/greeny"
+            android:fontFamily="serif-monospace"
+            />
         <TextView
             android:id="@+id/title"
             android:textSize="30sp"

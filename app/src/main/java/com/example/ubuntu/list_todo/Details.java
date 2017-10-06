@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.ubuntu.list_todo.controllers.DB;
+import com.example.ubuntu.list_todo.controllers.Task;
+
 public class Details extends AppCompatActivity {
     private DB db;
     private int id;

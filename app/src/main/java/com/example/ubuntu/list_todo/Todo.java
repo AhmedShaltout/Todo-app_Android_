@@ -14,19 +14,23 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+import com.example.ubuntu.list_todo.controllers.Task;
+import com.example.ubuntu.list_todo.controllers.DB;
 
 
 public class Todo extends Fragment {
     private LinearLayout cont;
     public static int editThis;
     private DB db;
+    DataMover communicator;
     private LayoutInflater inflater;
     public Todo() {
 
+    }
+
+    public void setCommunicator(DataMover activity){
+        this.communicator = activity;
     }
 
 
@@ -62,9 +66,8 @@ public class Todo extends Fragment {
         //////////////// GET THE DATA ///////////////
         Task[] todo = db.getTodo();
         if(todo != null) {
-            for (int x = 0; x < todo.length; x++) {
-                final Task task = todo[x];
-                View inflatedView = inflater.inflate(R.layout.task, null);
+            for (Task task:todo) {
+                View inflatedView = inflater.inflate(R.layout.task, cont, false);
                 LinearLayout layout = inflatedView.findViewById(R.id.task);
                 setListeners(layout);
                 ((TextView) layout.findViewById(R.id.idHolder)).setText(task.getId().toString());
@@ -89,6 +92,7 @@ public class Todo extends Fragment {
                     String id = ((TextView)task.findViewById(R.id.idHolder)).getText().toString();
                     db.markDone(Integer.parseInt(id));
                     cont.removeView(task);
+                    communicator.moveThisToFragment(task);
                 }
             }
         });
@@ -139,4 +143,9 @@ public class Todo extends Fragment {
             }
         });
     }
+
+    interface DataMover {
+        void moveThisToFragment(LinearLayout task);
+    }
+
 }
